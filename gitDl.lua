@@ -1,7 +1,7 @@
 local USERNAME = "MihailMecetin"
 local REPOSITORY = "ComputerCraft"
 
-print("Input github filename for user ".. USERNAME .. " and repo ".. REPOSOTORY)
+print("Input github filename for user ".. USERNAME .. " and repo ".. REPOSITORY)
 filename = read()
 
 local url = "https://raw.githubusercontent.com/".. USERNAME .."/".. REPOSITORY .."/master/".. filename ..".lua"
