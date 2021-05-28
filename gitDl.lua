@@ -8,7 +8,11 @@ local url = "https://raw.githubusercontent.com/".. USERNAME .."/".. REPOSITORY .
 
 content = http.get(url).readAll()
 
-local file = fs.open("file", "w")
+local file = fs.open(filename, "w")
 file.write(content)
-
+if fs.exists(filename) then
+    print ("Overwritten file ".. filename)
+else
+    print ("Created file".. filename)
+end
 file.close()
