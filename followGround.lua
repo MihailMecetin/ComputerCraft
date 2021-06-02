@@ -9,23 +9,32 @@
 -- 5 if cannot go back     if nothing below      , go down    1 time, GOTO 4
 -- 6 if cannot go down                             break block below  GOTO 5
 
+function refuel()
+    if turtle.getFuelLevel() < 10 then
+        print("refueling")
+        turtle.select(1)
+        turtle.refuel(1)
+    end
+end
 
 function goLowest()
     while not turtle.detectDown() do
         turtle.down()
     end
+    refuel()
 end
 
 function detectBack()
-    turtle.right()
-    turtle.right()
+    turtle.turnRight()
+    turtle.turnRight()
     data = turtle.detect()
-    turtle.right()
-    turtle.right()
+    turtle.turnRight()
+    turtle.turnRight()
     return data
 end
 
 function dForward() 
+    refuel()
     if not turtle.detect() 
     then 
         turtle.forward()
@@ -59,7 +68,8 @@ function dDown()
     dBack()
 end
 
-for i = 1,10,1 do
+for i = 1,50,1 do
+    refuel()
     goLowest()
     -- inspect block logic here
     dForward()
