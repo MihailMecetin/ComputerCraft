@@ -68,7 +68,9 @@ function dDown()
     dBack()
 end
 
-for i = 1,50,1 do
+print ("For how many steps forward?")
+local steps = read()
+for i = 1, steps, 1 do
     refuel()
     goLowest()
     -- inspect block logic here
