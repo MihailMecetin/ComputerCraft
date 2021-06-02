@@ -74,5 +74,6 @@ for i = 1,50,1 do
     -- inspect block logic here
     dForward()
     -- inspect block here again after 1 step forward.
+    print("Finished followGround")
 end
     
