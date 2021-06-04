@@ -52,7 +52,9 @@ function putLogs()
     -- starts by facing the chest
     -- get fuel for yourself
     turtle.select(Logs)
-    turtle.transferTo(Fuel, turtle.getItemSpace(Fuel))
+    if turtle.compareTo(Fuel) then
+        turtle.transferTo(Fuel, turtle.getItemSpace(Fuel))
+    end
     -- move excess Logs to chest
     turtle.select(Logs)
     dropped, reason = turtle.drop(turtle.getItemCount(Logs))
