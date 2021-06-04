@@ -8,10 +8,11 @@
 --     Tc
 
 -- TODO: 
+-- Add the throw all the rest of the items in the chest logic (e.g. apples, sticks)
 -- add MIN_SAPLInGS_NUM logic
 -- add the variable tree height logic
 -- add script for planting just enough saplings as the turt. has
--- make sure to not get too many saplings
+--  make sure to not get too many saplings
 -- move the refuel function to separate file and test
 
 -- TODO MAYBE:
@@ -57,10 +58,17 @@ function putLogs()
     turtle.transferTo(Fuel, turtle.getItemSpace(Fuel))
 -- move exess Logs to chest
     turtle.select(Logs)
-    dropped, reason = turtle.drop()
+    dropped, reason = turtle.drop(turtle.getItemCount(Logs))
     if (not dropped) then
         error(reason)
     end
+-- move everything else too
+    turtle.select(3)
+    turtle.drop()
+    turtle.select(4)
+    turtle.drop()
+    turtle.select(5)
+    turtle.drop()
 end
 
 function cutTrees()
@@ -68,6 +76,10 @@ function cutTrees()
     for i = 1, NUM_OF_TREES - 1, 1 do
         if detectBlock("log", "forward") then
             cutTree()
+        elseif (not turtle.detect()) then
+            -- if nothing is growing, put sapling
+            turtle.select(Saplings)
+            turtle.place()
         end
         turtle.turnLeft()
         turtle.forward()
@@ -126,7 +138,9 @@ function detectBlock(blockName, side)
     else 
         error("no such side, could only be up, down or forward")
     end
-    return string.match(data.name, blockName)
+    if success then return string.match(data.name, blockName)
+    else return false
+    end
 end
 
 --stepnumber = read()
