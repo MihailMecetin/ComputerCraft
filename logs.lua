@@ -50,18 +50,18 @@ function refuel()
 end
 
 function putLogs()
--- put all excess logs into chest
--- starts by facing the chest
--- get fuel for yourself
+    -- put all excess logs into chest
+    -- starts by facing the chest
+    -- get fuel for yourself
     turtle.select(Logs)
     turtle.transferTo(Fuel, turtle.getItemSpace(Fuel))
--- move excess Logs to chest
+    -- move excess Logs to chest
     turtle.select(Logs)
     dropped, reason = turtle.drop(turtle.getItemCount(Logs))
     if (not dropped) then
         error(reason)
     end
--- move everything else too
+    -- move everything else too
     turtle.select(3)
     turtle.drop()
     turtle.select(4)
@@ -71,7 +71,7 @@ function putLogs()
 end
 
 function cutTrees()
--- Starts and ends facing the first tree
+    -- Starts and ends facing the first tree
     for i = 1, NUM_OF_TREES, 1 do
         if detectBlock("log", "forward") then
             cutTree()
@@ -118,7 +118,7 @@ function cutTree()
         turtle.down()
     end
     turtle.back()
--- put sapling
+    -- put sapling
     turtle.select(Saplings)
     turtle.place()
 end
@@ -147,7 +147,7 @@ function detectBlock(blockName, side)
 end
 
 function forwardDig()
--- like turtle.forward() but digs block in front
+    -- like turtle.forward() but digs block in front
     if turtle.detect() then turtle.dig() end
     turtle.forward()
 end
