@@ -100,12 +100,11 @@ function cutTree()
     turtle.forward()
     -- while there are logs above, get them and move up
     while detectBlock("log", "up") do
+        -- gather logs
+        turtle.select(Logs)
         turtle.digUp()
         turtle.up()
-    end
-    -- while there are no blocks below, move down
-    while (not turtle.detectDown()) do
-    -- gather saplings on way down
+        -- gather saplings
         turtle.select(Saplings)
         for sides=1,4,1 do
             if detectBlock("leaves", "forward") then 
@@ -113,6 +112,9 @@ function cutTree()
             end
             turtle.turnRight()
         end
+    end
+    -- while there are no blocks below, move down
+    while (not turtle.detectDown()) do
         turtle.down()
     end
     turtle.back()
