@@ -56,7 +56,7 @@ function putLogs()
 -- get fuel for yourself
     turtle.select(Logs)
     turtle.transferTo(Fuel, turtle.getItemSpace(Fuel))
--- move exess Logs to chest
+-- move excess Logs to chest
     turtle.select(Logs)
     dropped, reason = turtle.drop(turtle.getItemCount(Logs))
     if (not dropped) then
@@ -73,7 +73,7 @@ end
 
 function cutTrees()
 -- Starts and ends facing the first tree
-    for i = 1, NUM_OF_TREES - 1, 1 do
+    for i = 1, NUM_OF_TREES, 1 do
         if detectBlock("log", "forward") then
             cutTree()
         elseif (not turtle.detect()) then
@@ -81,16 +81,16 @@ function cutTrees()
             turtle.select(Saplings)
             turtle.place()
         end
-        turtle.turnLeft()
-        turtle.forward()
-        turtle.turnRight()
-    end
-    if detectBlock("log", "forward") then
-        cutTree()
+        -- move to face the next tree, if not at last tree
+        if i < NUM_OF_TREES then
+            turtle.turnLeft()
+            forwardDig()
+            turtle.turnRight()
+        end
     end
     turtle.turnRight()
     for i = 1, NUM_OF_TREES - 1, 1 do
-        turtle.forward()
+        forwardDig()
     end
     turtle.turnLeft()
 end
@@ -141,6 +141,12 @@ function detectBlock(blockName, side)
     if success then return string.match(data.name, blockName)
     else return false
     end
+end
+
+function forwardDig()
+-- like turtle.forward() but digs block in front
+    if turtle.detect() then turtle.dig() end
+    turtle.forward
 end
 
 --stepnumber = read()
