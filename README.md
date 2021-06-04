@@ -53,7 +53,7 @@
 6. Turtle making turtle
 7. New Bootstrap turtle with a new station setup
 
-##Useful programs
+## Useful programs
 
 1.  [ ] First tree chopping ( Need to make a chest for crafting and saplings )
 1.  [ ] Logs station setup
@@ -159,5 +159,3 @@
 * 3 Diamonds
 * 3 Logs
 * 7 Iron ore
-test
-
