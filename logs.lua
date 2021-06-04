@@ -8,9 +8,8 @@
 --     Tc
 
 -- TODO: 
--- check the detectBlock function
--- add detectBlock to sapling gathering func. (cutTree)
 -- add MIN_SAPLInGS_NUM logic
+-- add the variable tree height logic
 -- add script for planting just enough saplings as the turt. has
 -- make sure to not get too many saplings
 -- move the refuel function to separate file and test
@@ -21,7 +20,7 @@
 -- multiple rows of saplings? definite maybe with more turtles.
 -- maybe change setup to be:
 -- ...ooooTc instead of 2 lines, would be faster and take less space
-
+-- add variable arg count to detectblock funct.
 
 MIN_FUEL_LEVEL = 20
 NUM_OF_TREES = 5 -- limit 32
@@ -37,8 +36,7 @@ function refuel()
     if turtle.getFuelLevel() < MIN_FUEL_LEVEL then
         -- if last fuel item, stop
         if (turtle.getItemCount(Fuel) == 1) then
-            print("Out Of Fuel")
-            error()
+            error("Out Of Fuel")
         else
         -- refuel with 5 items
             turtle.select(Fuel)
@@ -96,14 +94,12 @@ function cutTree()
     for i=1,TREE_HEIGHT,1 do
 -- gather saplings on way down
         turtle.select(Saplings)
-        turtle.dig()
-        turtle.turnRight()
-        turtle.dig()
-        turtle.turnRight()
-        turtle.dig()
-        turtle.turnRight()
-        turtle.dig()
-        turtle.turnRight()
+        for sides,4,1, do
+            if detectBlock("leaves", "forward") then 
+                turtle.dig()
+            end
+            turtle.turnRight()
+        end
         turtle.down()
     end
     turtle.back()
@@ -133,18 +129,9 @@ function detectBlock(blockName, side)
     return string.match(data.name, blockName)
 end
 
-function detectLog()
-    success, data = turtle.inspect()
-    if data.name == "minecraft:log" then
-        return true
-    else
-        return false
-    end
-end
-
 --stepnumber = read()
 while true do
-    if detectLog() then
+    if detectBlock("log", "forward") then
         step()
     end
     os.sleep(10)
