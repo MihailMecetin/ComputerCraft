@@ -13,6 +13,7 @@
 -- add MIN_SAPLInGS_NUM logic
 -- add script for planting just enough saplings as the turt. has
 -- make sure to not get too many saplings
+-- move the refuel function to separate file and test
 
 -- TODO MAYBE:
 -- plant the max amount of saplings
@@ -59,7 +60,7 @@ function putLogs()
 -- move exess Logs to chest
     turtle.select(Logs)
     dropped, reason = turtle.drop()
-    if NOT dropped then
+    if (not dropped) then
         error(reason)
     end
 end
@@ -122,11 +123,14 @@ end
 function detectBlock(blockName, side)
     if side == "up" then
         success, data = turtle.inspectUp()
-    if side == "down" then
+    elseif side == "down" then
         success, data = turtle.inspectDown()
-    if side == "forward" then
+    elseif side == "forward" then
         success, data = turtle.inspect()
-    return data.name == blockName
+    else 
+        error("no such side, could only be up, down or forward")
+    end
+    return string.match(data.name, blockName)
 end
 
 function detectLog()
