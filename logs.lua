@@ -156,6 +156,9 @@ end
 while true do
     if detectBlock("log", "forward") then
         step()
+    elseif (not turtle.detect()) then
+        turtle.select(Saplings)
+        turtle.place()
     end
     os.sleep(10)
 end
