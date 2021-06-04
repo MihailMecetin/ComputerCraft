@@ -9,8 +9,7 @@
 
 -- TODO: 
 -- add MIN_SAPLInGS_NUM logic
--- add the variable tree height logic
--- add script for planting just enough saplings as the turt. has
+-- add script for planting just enough saplings as the turtle has
 --  make sure to not get too many saplings
 -- move the refuel function to separate file and test
 
@@ -20,12 +19,11 @@
 -- multiple rows of saplings? definite maybe with more turtles.
 -- maybe change setup to be:
 -- ...ooooTc instead of 2 lines, would be faster and take less space
--- add variable arg count to detectblock funct.
+-- add variable argument count to detectblock funct.
 
 MIN_FUEL_LEVEL = 20
 NUM_OF_TREES = 5 -- limit 32
 MIN_SAPLINGS_NUM = 10
-TREE_HEIGHT = 7
 
 t = turtle
 Fuel = 1
@@ -113,6 +111,9 @@ function cutTree()
             turtle.turnRight()
         end
     end
+    -- get highest leaf block
+    turtle.select(Saplings)
+    turtle.digUp()
     -- while there are no blocks below, move down
     while (not turtle.detectDown()) do
         turtle.down()
