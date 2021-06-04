@@ -66,14 +66,14 @@ end
 function cutTrees()
 -- Starts and ends facing the first tree
     for i = 1, NUM_OF_TREES - 1, 1 do
-        if detectLog() then
+        if detectBlock("log", "forward") then
             cutTree()
         end
         turtle.turnLeft()
         turtle.forward()
         turtle.turnRight()
     end
-    if detectLog() then
+    if detectBlock("log", "forward") then
         cutTree()
     end
     turtle.turnRight()
@@ -94,7 +94,7 @@ function cutTree()
     for i=1,TREE_HEIGHT,1 do
 -- gather saplings on way down
         turtle.select(Saplings)
-        for sides,4,1, do
+        for sides=1,4,1 do
             if detectBlock("leaves", "forward") then 
                 turtle.dig()
             end
