@@ -8,7 +8,6 @@
 --     Tc
 
 -- TODO: 
--- Add the throw all the rest of the items in the chest logic (e.g. apples, sticks)
 -- add MIN_SAPLInGS_NUM logic
 -- add the variable tree height logic
 -- add script for planting just enough saplings as the turt. has
@@ -99,12 +98,14 @@ function cutTree()
     turtle.select(Logs)
     turtle.dig()
     turtle.forward()
-    for i=1,TREE_HEIGHT,1 do
+    -- while there are logs above, get them and move up
+    while detectBlock("log", "up") do
         turtle.digUp()
         turtle.up()
     end
-    for i=1,TREE_HEIGHT,1 do
--- gather saplings on way down
+    -- while there are no blocks below, move down
+    while (not turtle.detectDown()) do
+    -- gather saplings on way down
         turtle.select(Saplings)
         for sides=1,4,1 do
             if detectBlock("leaves", "forward") then 
