@@ -146,7 +146,7 @@ end
 function forwardDig()
 -- like turtle.forward() but digs block in front
     if turtle.detect() then turtle.dig() end
-    turtle.forward
+    turtle.forward()
 end
 
 --stepnumber = read()
